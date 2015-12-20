@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>ejbproxy</groupId>
+	<artifactId>ejbproxy-test-ear</artifactId>
+	<version>0.0.1</version>
+	<packaging>ear</packaging>
+
+	<name>ejbproxy-test-ear</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>ejbproxy</groupId>
+			<artifactId>ejbproxy-test-ear-ejb</artifactId>
+			<version>0.0.1</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>ejbproxy</groupId>
+			<artifactId>ejbproxy-test-ear-web</artifactId>
+			<version>0.0.1</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>ejbproxify</id>
+
+			<activation>
+				<property>
+					<name>ejbproxify</name>
+				</property>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>ejbproxy.maven.plugins</groupId>
+						<artifactId>maven-ejbproxy-plugin</artifactId>
+						<version>0.0.1</version>
+						<executions>
+							<execution>
+								<id>create-ejbproxy-ear</id>
+								<phase>package</phase>
+								<goals>
+									<goal>create-ear</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
